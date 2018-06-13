@@ -17,14 +17,14 @@ end entity  ;
 architecture RTL of RO  is
 	signal ro_internal : std_logic_vector(C_NUM_OF_INVERTERS-1 downto 0);
 begin
-RO_gen: for I in 0 to C_NUM_OF_INVERTERS-1 generate
+ro_gen: for I in 0 to C_NUM_OF_INVERTERS-1 generate
    
 
 first_ro : if I=0 generate
 		-- LUT2: 2-input Look-Up Table with general output
 		--7 Series
 		-- Xilinx HDL Libraries Guide, version 14.7
-		LUT2_inst : LUT2
+		first_ro : LUT2
 		generic map (
 		INIT => "1000")
 		port map (
