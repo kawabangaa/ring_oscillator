@@ -21,6 +21,8 @@ entity RO_network is
 		led_out : out std_logic_vector(C_NUM_OF_LEDS - 1 downto 0)
 		
 	);
+	attribute dont_touch : string;
+    attribute dont_touch of RO_network : entity is "TRUE";
 end entity RO_network;
 
 architecture RTL of RO_network is

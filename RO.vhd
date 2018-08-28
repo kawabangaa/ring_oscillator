@@ -12,6 +12,8 @@ entity RO is
 		enable : in std_logic;
 		output : out std_logic
 	);
+	attribute dont_touch : string;
+    attribute dont_touch of RO : entity is "TRUE";
 end entity  ;
 
 architecture RTL of RO  is
