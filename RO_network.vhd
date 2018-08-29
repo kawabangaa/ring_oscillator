@@ -34,13 +34,20 @@ architecture RTL of RO_network is
 	signal ro_en : std_logic_vector(C_NUM_OF_RO - 1 downto 0);
 
 	signal ro_output : std_logic_vector(C_NUM_OF_RO - 1 downto 0);
+    attribute dont_touch of ro_output : signal is "true";
+    
 	signal selected_ro_out : std_logic;
+	attribute dont_touch of selected_ro_out : signal is "true";
 	
 	signal sample_counter : std_logic_vector(integer(log2(natural(SAMPLE_RESULOTION))) downto 0);
+	attribute dont_touch of sample_counter : signal is "true";
 	signal sample_enable : std_logic; -- initializes the sample_counter
+	attribute dont_touch of sample_enable : signal is "true";
 	
 	signal cycle_counter : integer range 0 to MEASUREMENT_CYCLES;--std_logic_vector(integer(log2(natural(MEASUREMENT_CYCLES))) downto 0);
+	attribute dont_touch of cycle_counter : signal is "true";
 	signal cycle_enable : std_logic;
+	attribute dont_touch of cycle_enable : signal is "true";
 	
 	signal accepting_data : std_logic; -- enabling the byte_in_samp register
 	signal byte_in_samp : std_logic_vector(BYTE - 1 downto 0);
@@ -96,6 +103,8 @@ begin
 	 
 	 ro_en_source <= '1' when main_sm = RUN_RO else '0';
 	 send_result_enable <= '1' when main_sm = SEND_RESULT else '0';
+	 sample_enable <= '1'  when main_sm = RUN_RO else '0';
+	 cycle_enable <= '1'  when main_sm = RUN_RO else '0';
 	 
 	 
 	--DMUX
@@ -166,4 +175,5 @@ begin
 			end if;
 		end if;
 	end process ;
+	byte_out <= byte_out_int;
 end architecture RTL;
