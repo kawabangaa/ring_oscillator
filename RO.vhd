@@ -26,7 +26,7 @@ first_ro : if I=0 generate
 		-- LUT2: 2-input Look-Up Table with general output
 		--7 Series
 		-- Xilinx HDL Libraries Guide, version 14.7
-		first_ro : LUT2
+		INVERTER : LUT2
 		generic map (
 		INIT => "1000")
 		port map (
@@ -43,7 +43,7 @@ first_ro : if I=0 generate
 		-- LUT1: 1-input Look-Up Table with general output
 		--7 Series
 		-- Xilinx HDL Libraries Guide, version 14.7
-		middle_LUT1 : LUT1
+		INVERTER : LUT1
 		generic map (
 		INIT => "10")
 		port map (
@@ -57,7 +57,7 @@ first_ro : if I=0 generate
 				-- LUT1: 1-input Look-Up Table with general output
 		--7 Series
 		-- Xilinx HDL Libraries Guide, version 14.7
-		middle_LUT1 : LUT1
+		INVERTER : LUT1
 		generic map (
 		INIT => "10")
 		port map (
