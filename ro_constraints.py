@@ -1,4 +1,5 @@
 import datetime
+import excelReader
 
 FILE_PATH = "/home/kaki/Documents/Ring Oscillator/hdl/constraints_test.xdc"
 NUM_OF_INVERTERS = 121
@@ -37,6 +38,8 @@ def create_convertion_table():
         curr_row+=1
         CONVERTION_TBL[curr_row] = list(row_odd)
         curr_row += 1
+
+
 
 
 def gen_canvas(shape):
@@ -318,7 +321,7 @@ def generate_shape(shape):
     #     cursor[x] -= 1
 def convert_tuple_to_coords(tup):
     return "X{x}Y{y}".format(x = tup[0], y = tup[1])
-def ro_contraint(shape):
+def roConstraints(shape):
     output = datetime.datetime.now().strftime("## %I:%M%p on %B %d, %Y\n")
     for ro in range(NUM_OF_RO):
 
@@ -343,19 +346,22 @@ def regular_to_xilnx_coords_convertion(coords_in,coords_out):
     #print("coord in: {i} matches to {o}\n".format(i = coords_in, o = coords_out))
 
 
-
+def shapeShift(shape, newOrigin):
+    output = []
+    for ele in shape:
+        output.append([ele[0]+newOrigin[0], ele[1]+newOrigin[1]])
+    return output
 
 
 
 
 # actual script
-shape = [None]*NUM_OF_INVERTERS
-create_convertion_table()
-#print(CONVERTION_TBL)
 
-generate_shape(shape)
-draw(shape)
-output =ro_contraint(shape)
+create_convertion_table()
+print(CONVERTION_TBL)
+shape = excelReader.readExcel("/home/kaki/Documents/Ring Oscillator/snake_new.xlsx")
+#draw(shape)
+output =roConstraints(shape)
 
 
 f=open(FILE_PATH,"w")
